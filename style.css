@@ -1,0 +1,13 @@
+h1{
+    color:brown;
+}
+
+img{
+    transform: rotate(90);
+}
+canvas{
+    cursor: crosshair;
+}
+canvas{
+    border: 1px solid black;
+}
