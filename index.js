@@ -1,6 +1,7 @@
   let img; // Declare variable 'img'.
   let sound;
   var testConfetti;
+  var index = 0
 function preload(){
   sound = loadSound("POW.mp3")
 }
@@ -11,7 +12,7 @@ function setup() {
 
   createCanvas(width,height);
   img = loadImage('Cake.png'); // Load the image
-  testConfetti=[] 
+  testConfetti=[]
 }
 
 
@@ -24,16 +25,17 @@ function draw() {
     particle.draw()
   });
 
-  testConfetti.forEach(particle => {
-    particle.update()
-    particle.draw()
-  });
+  if(testConfetti.length>150){
+    testConfetti.splice(0,10)
+  }
   
 }
 function confetti(x,y,vx,vy){
   this.x=x
   this.y=y
   this.velocity={x:vx,y:vy}
+  this.index = index
+  index++
   this.draw=function(){
     fill(color('green'));
     rect(this.x, this.y, 12, 8);
@@ -42,12 +44,9 @@ function confetti(x,y,vx,vy){
     this.velocity.y+=.1
     this.x+=this.velocity.x
     this.y+=this.velocity.y
-    if(this.x>width ||this.y < height){
-      delete this
     }
   }
-
-}
+  
 
 
 function mousePressed(){
@@ -55,9 +54,7 @@ function mousePressed(){
     var theta = Math.random()*360
     var sx=Math.sin(theta)
     var sy=Math.cos(theta)
-
     testConfetti.push(new confetti(mouseX,mouseY,sx,sy))
-    }
-      sound.play()
-  }
-  
+}
+sound.play()
+}
