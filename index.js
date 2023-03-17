@@ -42,7 +42,7 @@ function confetti(x,y,vx,vy){
     this.velocity.y+=.1
     this.x+=this.velocity.x
     this.y+=this.velocity.y
-    if(this.x>width ||this.y > height){
+    if(this.x>width ||this.y < height){
       delete this
     }
   }
